@@ -62,6 +62,8 @@ require_once ("koneksi.php");
 	
 	<?php 
 	include "header.php";
+
+	if(!isset($_GET['page'])){
 	?>
 	
 	<!--/ End Slider Area -->
@@ -110,12 +112,12 @@ require_once ("koneksi.php");
 	    ?>
 
 			<!-- menampilkan data yang ada didalam database -->
-
             <div class="col-md-2 card text-center m-3" style="width: 18rem; ">
                 <form method="post">
                     <div>
+                    	<a href="?page=detail&idbrg=<?=$record['id_barang']?>">
 						<img class="mt-3" src="public/images/product/<?php echo $record['foto'];  ?>"  width="200px" height="200px" /><br/></br>
-                        <h6 class="judul-barang"><?php echo $record['nama_barang']; ?></h6>
+                        <h6 class=" judul-barang"><?php echo $record['nama_barang']; ?></h6>
                         <h5 class="text-danger mb-3"><?php echo "Rp ".number_format($record['harga_brg'],0,",",".");  ?></h5>
 
                         <input type="hidden" name="hidden_name" value="<?php echo $record['nama_barang']; ?>" />
@@ -124,15 +126,20 @@ require_once ("koneksi.php");
                     </div>
                 </form>
 			</div>
-
             <?php
             } 
             ?>
         </div>
-    </div>
+	</div>
+	
+	<?php } ?> 
 
+	<?php
+        if($_GET['page']=='detail'){
+			include"detail_barang.php";
+		}
 
-    <?php
+	if(!isset($_GET['page'])){
     $jumlahLink = 3;
         if($halaman >$jumlahLink ){
             $start_number = $halaman - $jumlahLink;
@@ -173,7 +180,7 @@ require_once ("koneksi.php");
 				<a  class="page-link ml-3" <?php if($halaman < $total_halaman) { echo "href='?jeniskelamin=$jeniskelamin&cari=$cari&halaman=$next'"; } ?>>Selanjutnya</a>
 			</li>
 		</ul>
-		<?php } }else{}?>
+		<?php }} }else{}?>
 	</nav>
 	<!-- End Pagnation -->
 	

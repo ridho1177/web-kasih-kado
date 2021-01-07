@@ -9,8 +9,8 @@
 <!--Section: Block Content-->
 <section class="mb-5">
 
-  <div class="row">
-    <div class="col-md-6 mb-4 mb-md-0">
+  <div class="row justify-content-center">
+    <div class="col-md-3 mb-4 mb-md-0 mt-5">
       <div id="mdb-lightbox-ui">
       <div class="mdb-lightbox">
 
@@ -29,7 +29,7 @@
       </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
     </br></br></br>
 
       <h5><?=$review['nama_barang']?></h5>

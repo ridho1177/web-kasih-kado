@@ -124,7 +124,7 @@ $username=$_SESSION["usernameadm"];
                     </div>
                     <div class="row d-flex justify-content-center">                  
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-danger text-white mb-4 text-center">
+                            <div class="card bg-info text-white mb-4 text-center">
                                 <div class="card-body">Pembayaran</div>
                                 <div class="card-footer d-flex align-items-center justify-content-center">
                                     <div class="row">
@@ -139,7 +139,7 @@ $username=$_SESSION["usernameadm"];
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-danger text-white mb-4 text-center">
+                            <div class="card bg-secondary text-white mb-4 text-center">
                                 <div class="card-body">Pesan</div>
                                 <div class="card-footer d-flex align-items-center justify-content-center">
                                     <div class="row">
