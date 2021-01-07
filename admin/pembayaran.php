@@ -107,7 +107,7 @@ $username=$_SESSION["usernameadm"];
                                                     <td><?php echo $record['bank'] ?></td>
                                                     <td><?php echo $record['no_rek'] ?></td>
                                                     <td><?php echo $record['total_pembayaran'] ?></td>
-                                                    <td><?php echo $record['status'] ?></td>
+                                                    <td><?php echo $record['status_pembayaran'] ?></td>
                                                     <td>
                                                         <div class="text-center">
                                                             <a href="konfirPembayaran.php?idpembayaran=<?php echo $record['id_pembayaran'] ?>;" class="btn btn-sm btn-success"

@@ -76,7 +76,7 @@ require_once ("koneksi.php");
 	<!-- End Preloader -->
 	
 	<?php 
-	include "header.php";
+	include "headerLogin.php";
 
 	if(!isset($_GET['page'])){
 	?>
@@ -201,7 +201,7 @@ require_once ("koneksi.php");
 	
 	<!-- Start Footer Area -->
 	<?php
-	include"footer.php";
+	include"footerLogin.php";
 	?>
 	<!-- /End Footer Area -->
 
