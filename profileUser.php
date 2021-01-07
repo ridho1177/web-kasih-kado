@@ -72,52 +72,46 @@ $email=$_SESSION["email"];
 
         <form method="post" action="simpanregistrasi.php">
         <div class="form-group row">
-        <label for="username" class="col-sm-2 col-form-label">Nama <span>*</span></label>
+        <label for="username" class="col-sm-2 col-form-label">Nama</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control"  name="nama_user" required>
+            <input type="text" class="form-control"  name="nama_user" value="<?php echo $record['nama_user'] ?>" readonly>
         </div>
         </div>
 
         <div class="form-group row">
-        <label for="nama" class="col-sm-2 col-form-label">Email <span>*</span></label>
+        <label for="nama" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control"  name="email" required>
+            <input type="email" class="form-control"  name="email" value="<?php echo $record['email'] ?>" readonly>
         </div>
         </div>
         <div class="form-group row">
-        <label for="nama" class="col-sm-2 col-form-label">No Hp <span>*</span></label>
+        <label for="nama" class="col-sm-2 col-form-label">No Hp </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control"  name="no_hp" required>
+            <input type="text" class="form-control"  name="no_hp" value="<?php echo $record['no_hp'] ?>" readonly>
         </div>
         </div>
     <div class="form-group row">
-        <label for="nama" class="col-sm-2 col-form-label">alamat <span>*</span></label>
+        <label for="nama" class="col-sm-2 col-form-label">alamat </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control"  name="alamat" required>
+            <input type="text" class="form-control"  name="alamat" value="<?php echo $record['alamat'] ?>" readonly>
         </div>
         </div>
     <div class="form-group row">
-        <label for="nama" class="col-sm-2 col-form-label">Username <span>*</span></label>
+        <label for="nama" class="col-sm-2 col-form-label">Username </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control"  name="username_user" required>
+            <input type="text" class="form-control"  name="username_user" value="<?php echo $record['username_user'] ?>" readonly>
         </div>
         </div>
-    <div class="form-group row">
-        <label for="password" class="col-sm-2 col-form-label">Password <span>*</span></label>
-        <div class="col-sm-10">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-        </div>
-    </div>
     <div class="form-group row justify-content-center">
         <div class="col-sm-2 text-center">
-        <button class="btn btn-primary" type="submit" name="register_submit">Register</button>
+        <button class="btn btn-primary" type="submit" name="register_submit">Update Profile</button>
         </div>
     </div>
     </form>
 <?php 
     }
 ?>
-  </div>
+    </div>
 </main>
 
 </body>

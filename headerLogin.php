@@ -13,7 +13,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 						<div class="right-content">
 							<ul class="list-main">
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-								<li><i class="ti-user"></i> <a href="#"><?php echo $_SESSION['username'];?></a></li>
+								<li><i class="ti-user"></i> <a href="profileUser.php"><?php echo $_SESSION['username'];?></a></li>
 								<li><i class="ti-power-off"></i><a href="logout.php">LogOut</a></li>
 							</ul>
 						</div>
