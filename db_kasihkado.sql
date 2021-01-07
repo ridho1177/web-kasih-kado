@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2020 at 03:17 AM
+-- Generation Time: Jan 07, 2021 at 11:24 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -34,6 +34,14 @@ CREATE TABLE `admin` (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nama_admin`, `username`, `password`) VALUES
+(4, 'Admin', 'admin1', '21232f297a57a5a743894a0e4a801fc3'),
+(5, 'Admin', 'admin', '21232f297a57a5a743894a0e4a801fc3');
+
 -- --------------------------------------------------------
 
 --
@@ -56,7 +64,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_brg`, `jml_barang`, `deskripsi`, `foto`, `id_kategori`, `FileFoto`) VALUES
-(1, 'Mobil remot', 100000, 2, 'mobil remot', '1.jpg', 1, ''),
+(1, 'Mobil remot 1', 1000000, 3, 'mobil remot baguus', '3.jpg', 11, ''),
 (2, 'Iphone 11', 11000000, 3, 'iphone 11', '2.jpg', 2, ''),
 (3, 'Jam Tangan Pria', 100000, 3, 'jam tangan pra', '3.jpg', 3, ''),
 (4, 'Robot transformer', 250000, 5, 'Robot transformer', '4.jpg', 4, ''),
@@ -69,9 +77,10 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga_brg`, `jml_barang`, `de
 (13, 'contoh tittle yang panjang banget', 100000, 5, 'aaasas', '1.jpg', 6, ''),
 (14, 'baju', 20000, 3, 'baju bukalapak', 'logo-google-graph.png', 2, ''),
 (15, 'baju', 20000, 3, 'baju bukalapak', 'logo-google-graph.png', 2, ''),
-(17, 'celana', 49999, 43, 'celana jeans', 'logo-google-graph.png', 1, ''),
-(18, 'mobil rc', 100000, 3, 'mobil remote', 'logo-google-graph.png', 5, ''),
-(24, 'kotak kado', 20000, 3, 'baju bukalapak', 'logo-google-graph.png', 5, '');
+(17, 'celana', 100000, 43, 'celana jeans', 'logo-google-graph.png', 8, ''),
+(28, 'baju', 100000, 3, 'baju bukalapak', 'logo-google-graph.png', 2, ''),
+(29, 'mobil mainan', 100000, 3, 'celana jeans', 'logo-google-graph.png', 10, ''),
+(30, 'kotak kado', 100000, 43, 'aaaaa', 'logo-google-graph.png', 13, '');
 
 -- --------------------------------------------------------
 
@@ -141,6 +150,29 @@ CREATE TABLE `pengiriman` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pesan`
+--
+
+CREATE TABLE `pesan` (
+  `id_pesan` int(11) NOT NULL,
+  `nama_pengirim` varchar(100) NOT NULL,
+  `ket` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `no_hp` varchar(13) NOT NULL,
+  `isi_pesan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pesan`
+--
+
+INSERT INTO `pesan` (`id_pesan`, `nama_pengirim`, `ket`, `email`, `no_hp`, `isi_pesan`) VALUES
+(1, 'aa', 'aa', 'aa', '3232', 'ss'),
+(2, 'ridho', 'coba', 'contoh123@gmail.cpm', '0937823232', 'coba kirim');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transaksi`
 --
 
@@ -153,7 +185,8 @@ CREATE TABLE `transaksi` (
   `tgl_transaksi` date NOT NULL,
   `id_barang` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_pembayaran` int(11) NOT NULL
+  `id_pembayaran` int(11) NOT NULL,
+  `status_transaksi` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -177,10 +210,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama_user`, `email`, `no_hp`, `alamat`, `username_user`, `password`) VALUES
-(3, 'pengguna 1', 'contoh123@gmail.cpm', '423532442', 'yogyakarta', 'user3', '123'),
-(4, 'pengguna 1', '082159571180', '42534242', 'sdfsdf', 'wss', '123'),
-(5, 'pengguna 1', 'contoh123@gmail.cpm', '0937823232', 'yogyakarta', 'user4', '1234'),
-(6, 'user4', 'contoh123@gmail.cpm', '0937823232', 'yogyakarta', 'user5', '12345');
+(8, 'pengguna 1', '082159571180', '42534242', 'yogyakarta', 'admin', '202cb962ac59075b964b07152d234b70'),
+(9, 'pengguna 1', 'contoh123@gmail.cpm', '0937823232', 'yogyakarta', 'user', '202cb962ac59075b964b07152d234b70'),
+(10, 'pengguna 1', 'contoh123@gmail.cpm', '0937823232', 'yogyakarta', 'user11', '202cb962ac59075b964b07152d234b70'),
+(11, 'pengguna 1', 'contoh123@gmail.cpm', '42534242', 'yogyakarta', '111', '698d51a19d8a121ce581499d7b701668');
 
 --
 -- Indexes for dumped tables
@@ -220,6 +253,12 @@ ALTER TABLE `pengiriman`
   ADD KEY `id_user` (`id_user`);
 
 --
+-- Indexes for table `pesan`
+--
+ALTER TABLE `pesan`
+  ADD PRIMARY KEY (`id_pesan`);
+
+--
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
@@ -243,13 +282,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -270,6 +309,12 @@ ALTER TABLE `pengiriman`
   MODIFY `id_pengiriman` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `pesan`
+--
+ALTER TABLE `pesan`
+  MODIFY `id_pesan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
@@ -279,7 +324,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
