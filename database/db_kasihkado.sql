@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2021 at 11:24 AM
+-- Generation Time: Jan 07, 2021 at 07:56 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -39,8 +39,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `nama_admin`, `username`, `password`) VALUES
-(4, 'Admin', 'admin1', '21232f297a57a5a743894a0e4a801fc3'),
-(5, 'Admin', 'admin', '21232f297a57a5a743894a0e4a801fc3');
+(5, 'Admin', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
+(6, 'Febri Kurniawan', 'admin1', '21232f297a57a5a743894a0e4a801fc3'),
+(7, 'Arif Muttama ', 'admin2', '21232f297a57a5a743894a0e4a801fc3');
 
 -- --------------------------------------------------------
 
@@ -128,9 +129,11 @@ INSERT INTO `kategori` (`id_kategori`, `jk`, `umur`) VALUES
 
 CREATE TABLE `pembayaran` (
   `id_pembayaran` int(11) NOT NULL,
+  `bank` varchar(30) NOT NULL,
   `status_pembayaran` varchar(100) NOT NULL,
-  `jenis_pembayaran` varchar(100) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `no_rek` varchar(30) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `total_pembayaran` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -178,16 +181,26 @@ INSERT INTO `pesan` (`id_pesan`, `nama_pengirim`, `ket`, `email`, `no_hp`, `isi_
 
 CREATE TABLE `transaksi` (
   `id_transaksi` int(11) NOT NULL,
+  `nama_penerima` varchar(100) NOT NULL,
   `total_harga` int(25) NOT NULL,
   `jml_barang` int(11) NOT NULL,
   `alamat_kirim` text NOT NULL,
-  `id_pengiriman` int(11) NOT NULL,
+  `pengiriman` varchar(20) NOT NULL,
   `tgl_transaksi` date NOT NULL,
   `id_barang` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_pembayaran` int(11) NOT NULL,
-  `status_transaksi` varchar(100) NOT NULL
+  `status_transaksi` varchar(100) NOT NULL DEFAULT 'Belum Bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `nama_penerima`, `total_harga`, `jml_barang`, `alamat_kirim`, `pengiriman`, `tgl_transaksi`, `id_barang`, `id_user`, `status_transaksi`) VALUES
+(13, 'arif kurniawan', 100000, 1, 'yogyakarta, Kota Tual, Maluku, qqq', 'POS', '2021-01-07', 10, 11, 'Dikirim'),
+(14, 'ridho tri prasetyo', 100000, 1, 'jl ponegoro, Kota Singkawang, Kalimantan Barat, 34554', 'JNE', '2021-01-07', 10, 11, 'Dikirim'),
+(15, 'ridho tri', 100000, 1, 'jl ponegoro, Kabupaten Belitung, Bangka Belitung, 45434', 'JNE', '2021-01-07', 28, 11, 'Belum Bayar'),
+(16, 'Ridho tri prasetyo', 250000, 1, 'jl ponegoro, Kabupaten Pontianak, Kalimantan Barat, 34554', 'J&T', '2021-01-07', 4, 11, 'Belum Bayar');
 
 -- --------------------------------------------------------
 
@@ -263,10 +276,9 @@ ALTER TABLE `pesan`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
-  ADD KEY `id_pengiriman` (`id_pengiriman`),
+  ADD KEY `id_pengiriman` (`pengiriman`),
   ADD KEY `id_barang` (`id_barang`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_pembayaran` (`id_pembayaran`);
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `user`
@@ -282,7 +294,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `barang`
@@ -318,7 +330,7 @@ ALTER TABLE `pesan`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -353,9 +365,7 @@ ALTER TABLE `pengiriman`
 --
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_pengiriman`) REFERENCES `pengiriman` (`id_pengiriman`),
-  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`),
-  ADD CONSTRAINT `transaksi_ibfk_4` FOREIGN KEY (`id_pembayaran`) REFERENCES `pembayaran` (`id_pembayaran`);
+  ADD CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
