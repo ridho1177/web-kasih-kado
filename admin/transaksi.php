@@ -75,7 +75,8 @@ $username=$_SESSION["usernameadm"];
                                     <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Nama Konsumen</th>
+                                                <th>Nama Akun</th>
+                                                <th>Nama Penerima</th>
                                                 <th>Item yang dibeli</th>
                                                 <th>Jumlah</th>
                                                 <th>Total Harga</th>
@@ -101,22 +102,23 @@ $username=$_SESSION["usernameadm"];
                                             $jumlah_data = mysqli_num_rows($query);
                                             $total_halaman = ceil($jumlah_data / $batas);
 
-                                            $data_barang = mysqli_query($con, "SELECT * FROM `transaksi` JOIN user ON transaksi.id_user=user.id_user JOIN barang ON transaksi.id_barang=barang.id_barang JOIN pengiriman ON transaksi.id_pengiriman=pengiriman.id_pengiriman JOIN pembayaran ON transaksi.id_pembayaran=pembayaran.id_pembayaran ORDER BY id_transaksi DESC LIMIT $halaman_awal, $batas");
+                                            $data_barang = mysqli_query($con, "SELECT * FROM `transaksi` JOIN user ON transaksi.id_user=user.id_user JOIN barang ON transaksi.id_barang=barang.id_barang ORDER BY id_transaksi DESC LIMIT $halaman_awal, $batas");
                                             $nomor = $halaman_awal+1;
                                             while ($record = mysqli_fetch_array($data_barang)) {
                                         ?>
                                                 <tr>
                                                     <td><?php echo $record['nama_user'] ?></td>
+                                                    <td><?php echo $record['nama_penerima'] ?></td>
                                                     <td><?php echo $record['nama_barang'] ?></td>
                                                     <td><?php echo $record['jml_barang'] ?></td>
                                                     <td><?php echo $record['total_harga'] ?></td>
                                                     <td><?php echo $record['alamat_kirim'] ?></td>
-                                                    <td><?php echo $record['jenis_kurir'] ?></td>
+                                                    <td><?php echo $record['pengiriman'] ?></td>
                                                     <td><?php echo $record['tgl_transaksi'] ?></td>
                                                     <td><?php echo $record['status_transaksi'] ?></td>
                                                     <td>
                                                         <div class="text-center">
-                                                            <a href="hapusadmin.php?idadmin=<?php echo $record['id_transaksi'] ?>;" class="btn btn-sm btn-danger delete"
+                                                            <a href="kirimBarang.php?idTransaksi=<?php echo $record['id_transaksi'] ?>;" class="btn btn-sm btn-info edit"
                                                                 >Kirim</a>
                                                         </div>
                                                         

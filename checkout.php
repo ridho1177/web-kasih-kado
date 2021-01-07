@@ -12,6 +12,7 @@ $username=$_SESSION["username"];
 $nama=$_SESSION["nama"];
 $email=$_SESSION["email"];
 
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ $email=$_SESSION["email"];
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Title Tag  -->
-    <title>Menu-Checkout</title>
+    <title>Checkout</title>
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="images/favicon.png">
 	<!-- Web Font -->
@@ -66,48 +67,52 @@ $email=$_SESSION["email"];
 <?php
 include ("headerLogin.php");
 ?>
+
+<?php
+    
+    $data_user = mysqli_query($con, "SELECT * FROM barang WHERE id_barang='".$_GET['idbarang']."'");
+
+$record= mysqli_fetch_array($data_user);
+
+$harga= $record["harga_brg"];
+?>
 				
         <!-- Start Checkout -->
+
 		<section class="shop checkout section mt-5" style="margin-top: 150px !important;">
 			<div class="container ">
 				<div class="row"> 
 					<div class="col-lg-8 col-12">
 						<div class="checkout-form">
-							<h2>CHECKOUT PESANAN</h2>
+                            <h2>CHECKOUT PESANAN</h2>
+
 							<p>Mohon isi data berikut dengan benar.</p>
-							<!-- Form -->
-							<form class="form" method="post" action="#">
+                            <!-- Form -->
+                            
+							<form class="form" method="post">
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Nama Depan<span>*</span></label>
-											<input type="text" name="name" placeholder="" required="required">
+											<input type="text" name="nama_depan" placeholder="" required="required">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Nama Belakang<span>*</span></label>
-											<input type="text" name="name" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Email<span>*</span></label>
-											<input type="email" name="email" placeholder="" required="required">
+											<input type="text" name="nama_belakang" placeholder="" required="required">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Nomor Telepon<span>*</span></label>
-											<input type="text" name="number" placeholder="" required="required">
+											<input type="text" name="no_hp" placeholder="" required="required">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Provinsi<span>*</span></label>
-											<select name="country_name" id="country">
-												<option value="AF">Aceh</option>
-												<option value="AX">Bengkulu</option>
+											<select class="form-control" name="nama_provinsi">
 
 											</select>
 										</div>
@@ -115,42 +120,36 @@ include ("headerLogin.php");
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Kota/Kabupaten<span>*</span></label>
-											<select name="state-province" id="state-province">
-												<option value="divition" selected="selected">Pilih Kota/Kabupaten</option>
-												<option>Sleman</option>
-												<option>Yogyakarta</option>
-												<option>Jakarta Selatan</option>
-												<option>Pontianak</option>
-												<option>Surabaya</option>
-												<option>Semarang</option>
+											<select name="nama_distrik" class="form-control">
+												
 											</select>
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Alamat Lengkap<span>*</span></label>
-											<input type="text" name="address" placeholder="" required="required">
+											<input type="text" name="alamat" placeholder="" required="required">
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Kode Pos<span>*</span></label>
-											<input type="text" name="post" placeholder="" required="required">
+											<input type="text" name="kode_post" placeholder="" required="required">
 										</div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<label>Metode Pengiriman<span>*</span></label>
-											<select name="state-province" id="state-province">
+											<select name="pengiriman" class="form-control">
 												<option value="divition" selected="selected">Pilih Kurir</option>
-												<option>JNE</option>
+												<option >JNE</option>
 												<option>J&T</option>
 												<option>POS</option>
 											</select>
 										</div>
 									</div>
 								</div>
-							</form>
+							
 							<!--/ End Form -->
 						</div>
 					</div>
@@ -161,9 +160,9 @@ include ("headerLogin.php");
 								<h2>TOTAL BELANJA</h2>
 								<div class="content">
 									<ul>
-										<li>Sub Total<span>$330.00</span></li>
-										<li>(+) Diskon<span>$10.00</span></li>
-										<li class="last">Total<span>$340.00</span></li>
+										<li>Sub Total<span><?php echo "Rp ".number_format($harga,0,",","."); ?></span></li>
+										<li>(+) Ongkir<span>Rp 0</span></li>
+										<li class="last">Total<span><?php echo "Rp ".number_format($harga,0,",","."); ?></span></li>
 									</ul>
 								</div>
 							</div>
@@ -172,11 +171,6 @@ include ("headerLogin.php");
 							<div class="single-widget">
 								<h2>Metode Pembayaran</h2>
 								<div class="content">
-									<div class="checkbox">
-										<label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Alfamart</label>
-										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Transfer Bank</label>
-										<label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox"> Dana</label>
-									</div>
 								</div>
 							</div>
 							<!--/ End Order Widget -->
@@ -191,10 +185,11 @@ include ("headerLogin.php");
 							<div class="single-widget get-button">
 								<div class="content">
 									<div class="button">
-										<a href="#" class="btn">checkout</a>
+										<button class="btn" type="submit" name="checkout">checkout</button>
 									</div>
 								</div>
-							</div>
+                            </div>
+                        </form>
 							<!--/ End Button Widget -->
 						</div>
 					</div>
@@ -205,45 +200,76 @@ include ("headerLogin.php");
 		
         
         <?php 
-        include ("footer.php");
+        include ("footerLogin.php");
         ?>
         
+
+        <?php
+            if (isset($_POST['checkout'])) { 
+
+                $nama = $_POST['nama_depan']." ".$_POST['nama_belakang'];
+                $alamat = $_POST['alamat'].", ".$_POST['nama_distrik'].", ". $_POST['nama_provinsi'].", ".$_POST['kode_post'];  
+                $kurir = $_POST['pengiriman'];
+                $id_user=$_SESSION["id_user"];                        
+                $tgl=date("Y-m-d");
+                $barang = $_GET["idbarang"];
+
+
+                            //$sql= "INSERT INTO `transaksi` ( `nama_penerima`,`total_harga`, `jml_barang`, `alamat_kirim`, `pengiriman`, `tgl_transaksi`, `id_barang`, `id_user`, `status_transaksi`) VALUES ( 'ridho','100000', '1', 'jogja', '".$kurir."', '".$tgl."', '10', '".$_SESSION["id_user"]."', 'Belum Bayar')";
+
+                            $sql = "INSERT INTO `transaksi` ( `nama_penerima`,`total_harga`, `jml_barang`, `alamat_kirim`, `pengiriman`, `tgl_transaksi`, `id_barang`, `id_user`, `status_transaksi`) VALUES ( '".$nama."','".$harga."', '1', '".$alamat."', '".$kurir."', '".$tgl."', '".$barang."', '".$_SESSION["id_user"]."', 'Belum Bayar')";
+
+                            //eksekusi query
+                            $hasil=mysqli_query($con,$sql) ;
+            ?>
+
+            <script>
+                alert("Pemesanan Berhasil");
+                window.location='checkout.php';
+            </script>
+
+            <?php
+            }
+                // }else{
+                //     echo '<script language="javascript">
+                //     alert ("Gagal");
+                //     window.location="keranjang.php";
+                //     </script>';
+                //     exit();
+                // }
+            ?>
 
 	<!-- Jquery -->
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/jquery-migrate-3.0.0.js"></script>
-	<script src="public/js/jquery-ui.min.js"></script>
-	<!-- Popper JS -->
-	<script src="public/js/popper.min.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="public/js/bootstrap.min.js"></script>
-	<!-- Color JS -->
-	<script src="public/js/colors.js"></script>
-	<!-- Slicknav JS -->
-	<script src="public/js/slicknav.min.js"></script>
-	<!-- Owl Carousel JS -->
-	<script src="public/js/owl-carousel.js"></script>
-	<!-- Magnific Popup JS -->
-	<script src="public/js/magnific-popup.js"></script>
-	<!-- Fancybox JS -->
-	<script src="public/js/facnybox.min.js"></script>
-	<!-- Waypoints JS -->
-	<script src="public/js/waypoints.min.js"></script>
-	<!-- Countdown JS -->
-	<script src="public/js/finalcountdown.min.js"></script>
-	<!-- Nice Select JS -->
-	<script src="public/js/nicesellect.js"></script>
-	<!-- Ytplayer JS -->
-	<script src="public/js/ytplayer.min.js"></script>
-	<!-- Flex Slider JS -->
-	<script src="public/js/flex-slider.js"></script>
-	<!-- ScrollUp JS -->
-	<script src="public/js/scrollup.js"></script>
-	<!-- Onepage Nav JS -->
-	<script src="public/js/onepage-nav.min.js"></script>
-	<!-- Easing JS -->
-	<script src="public/js/easing.js"></script>
-	<!-- Active JS -->
-	<script src="public/js/active.js"></script>
+	<script src="public/js/jquery-ui.min.js"></script> 
+
+    <script>
+
+        $(document).ready(function(){
+            $.ajax({
+
+            type:'post',
+            url: 'dataprovinsi.php',
+            success:function(hasil_provinsi){
+                $("select[name=nama_provinsi]").html(hasil_provinsi);
+            }
+            });
+
+            $("select[name=nama_provinsi]").on("change",function(){
+                //ambil id provinsi yg dipilih dari atribut pribadi
+                var id_provinsi_terpilih = $("option:selected",this).attr("id_provinsi");
+                $.ajax({
+                    type:'post',
+                    url: 'datadistrik.php',
+                    data:'id_provinsi='+id_provinsi_terpilih,
+                    success:function(hasil_distrik){
+                        $("select[name=nama_distrik]").html(hasil_distrik);
+                    }
+                })
+            })
+        });
+
+    </script>
 </body>
 </html>

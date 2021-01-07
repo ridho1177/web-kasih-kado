@@ -68,7 +68,7 @@ $username=$_SESSION["usernameadm"];
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 <?php
-                    $query = mysqli_query($con,"Select (select count(id_user) from user) as user, (select count(id_barang) from barang) as barang,(select count(id_transaksi) from transaksi) as transaksi,(select count(id_admin) from admin) as admin");
+                    $query = mysqli_query($con,"Select (select count(id_user) from user) as user, (select count(id_barang) from barang) as barang,(select count(id_transaksi) from transaksi) as transaksi,(select count(id_admin) from admin) as admin, (select count(id_pembayaran) from pembayaran) as pembayaran, (select count(id_pesan) from pesan) as pesan");
                     while ($record = mysqli_fetch_array($query)) {
                 ?>
                     <div class="row d-flex justify-content-center mt-5 mb-2">
@@ -106,8 +106,6 @@ $username=$_SESSION["usernameadm"];
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row d-flex justify-content-center">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-success text-white mb-4 text-center">
                                 <div class="card-body">Transaksi</div>
@@ -117,6 +115,38 @@ $username=$_SESSION["usernameadm"];
                                             <p>Jumlah Transaksi</p>
                                             <p><?php echo $record['transaksi'] ?></p>
                                             <a class="small text-white stretched-link" href="Transaksi.php">View Details</a>
+                                        </div>
+                                    </div>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center">                  
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4 text-center">
+                                <div class="card-body">Pembayaran</div>
+                                <div class="card-footer d-flex align-items-center justify-content-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Jumlah Pembayaran</p>
+                                            <p><?php echo $record['pembayaran'] ?></p>
+                                            <a class="small text-white stretched-link" href="pembayaran.php">View Details</a>
+                                        </div>
+                                    </div>
+                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-danger text-white mb-4 text-center">
+                                <div class="card-body">Pesan</div>
+                                <div class="card-footer d-flex align-items-center justify-content-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Jumlah Pesan</p>
+                                            <p><?php echo $record['pesan'] ?></p>
+                                            <a class="small text-white stretched-link" href="pesan.php">View Details</a>
                                         </div>
                                     </div>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>

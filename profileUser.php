@@ -60,7 +60,7 @@ $email=$_SESSION["email"];
 <main role="main" class="flex-shrink-0">
     <div class="container col-6">
     <h1 class="mt-5">Profile Anda</h1>
-    <p class="lead">Rahasiakan dari orang lain!</p>
+    <p class="lead">Harap rahasiakan dari orang lain!</p>
     <hr/>
 
     <?php

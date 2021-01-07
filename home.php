@@ -41,6 +41,7 @@ require_once ("koneksi.php");
     <link rel="stylesheet" href="public/css/owl-carousel.css">
 	<!-- Slicknav -->
     <link rel="stylesheet" href="public/css/slicknav.min.css">
+    <link rel="stylesheet" type="text/css" href="public/css/productviewgallery.css" media="all" />
 	
 	<!-- Eshop StyleSheet -->
 	<link rel="stylesheet" href="public/css/reset.css">
@@ -65,7 +66,12 @@ require_once ("koneksi.php");
 	
     <?php 
 	include "header.php";
+	if($_GET['page']=='detail'){
+		include"detail_barang.php";
+	}
+	if(!isset($_GET['page'])){
 	?>
+	
 	<!--/ End Header -->
 	
 	<!-- Slider Area -->
@@ -82,7 +88,7 @@ require_once ("koneksi.php");
 										<h1><span>DISKON NATAL UP TO 50% OFF </span>UNTUK ORANG TERKASIH</h1>
 										<p>Bingung mau cari kado apa ?<br> Disini aja bisa pilih-pilih sesuai <br> untuk orang yang spesial.</p>
 										<div class="button">
-											<a href="#" class="btn">BELI SEKARANG</a>
+											<a href="#beliproduk" class="btn">BELI SEKARANG</a>
 										</div>
 									</div>
 								</div>
@@ -133,7 +139,7 @@ require_once ("koneksi.php");
 	<!-- End Shop Services Area -->
 
 	<!--/ End Slider Area -->
-    <div class="container" style="margin-top: 30px;">
+    <div class="container" id="beliproduk" style="margin-top: 30px;">
         <div class="row">
             <div class="col-12">
                 <div class="text-center">
@@ -146,8 +152,7 @@ require_once ("koneksi.php");
     <!-- Start Product Area -->
 
     
-        <?php
-
+	<?php
         $batas = 15;
         $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
         $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
@@ -175,6 +180,7 @@ require_once ("koneksi.php");
                 $data_barang = mysqli_query($con, "SELECT * FROM barang JOIN kategori ON barang.id_kategori=kategori.id_kategori ORDER BY barang.id_barang DESC LIMIT $halaman_awal, $batas");
 				$nomor = $halaman_awal+1;	
             }
+
         ?>
 
             <div class="container"> 
@@ -188,20 +194,21 @@ require_once ("koneksi.php");
             <div class="col-md-2 card text-center m-3" style="width: 18rem; ">
                 <form method="post">
                     <div>
+                    	<a href="?page=detail&idbrg=<?=$record['id_barang']?>">
 						<img class="mt-3" src="public/images/product/<?php echo $record['foto'];  ?>"  width="200px" height="200px" /><br/></br>
                         <h6 class=" judul-barang"><?php echo $record['nama_barang']; ?></h6>
                         <h5 class="text-danger mb-3"><?php echo "Rp ".number_format($record['harga_brg'],0,",",".");  ?></h5>
 
                         <input type="hidden" name="hidden_name" value="<?php echo $record['nama_barang']; ?>" />
                         <input type="hidden" name="hidden_price" value="<?php echo "Rp ".number_format($record['harga_brg'],0,",","."); ?>" />
-                        <input type="hidden" name="hidden_id" value="<?php echo $record['id_barang']; ?>" /> 
-						<button class="btn btn-success"><a href="logres.php" class="btn btn-success">Detail</a></button>                    
+                        <input type="hidden" name="hidden_id" value="<?php echo $record['id_barang']; ?>" />                     
                     </div>
                 </form>
 			</div>
 
             <?php
-            } 
+            }
+        
             ?>
         </div>
     </div>
@@ -248,6 +255,7 @@ require_once ("koneksi.php");
 
 	<!-- Start Footer Area -->
 	<?php
+	}
 	include"footer.php";
 	?>
 	<!-- /End Footer Area -->

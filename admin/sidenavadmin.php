@@ -20,13 +20,17 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Transaksi
                         </a>
-                        <a class="nav-link" href="menuAdmin.php">
+                        <a class="nav-link" href="pembayaran.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Admin
+                            Pembayaran
                         </a>
                         <a class="nav-link" href="pesan.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Pesan
+                        </a>
+                        <a class="nav-link" href="menuAdmin.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Admin
                         </a>
                     </div>
                 </div>

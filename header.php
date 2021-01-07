@@ -11,7 +11,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 						<!-- Top Right -->
 						<div class="right-content">
 							<ul class="list-main">
-								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
+								<li><i class="ti-briefcase"></i> <a href="logres.php">Pesanan saya</a></li>
 								<li><i class="ti-user"></i> <a href="logres.php">My account</a></li>
 								<li><i class="ti-power-off"></i><a href="logres.php">Login</a></li>
 							</ul>
@@ -71,42 +71,13 @@ error_reporting(E_ALL & ~E_NOTICE);
 					<div class="col-lg-2 col-md-3 col-12">
 						<div class="right-bar">
 							<!-- Search Form -->
-							<div class="sinlge-bar">
-								<a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-							</div>
 							<div class="sinlge-bar user">
-								<a href="login.php" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+								<a href="logres.php" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 							</div>
 							<div class="sinlge-bar shopping">
-								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+								<a href="logres.php" class="single-icon"><i class="ti-shopping-cart"></i> </a>
 								<!-- Shopping Item -->
-								<div class="shopping-item">
-									<div class="dropdown-cart-header">
-										<span>2 Items</span>
-										<a href="#">View Cart</a>
-									</div>
-									<ul class="shopping-list">
-										<li>
-											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-											<h4><a href="#">Woman Ring</a></h4>
-											<p class="quantity">1x - <span class="amount">$99.00</span></p>
-										</li>
-										<li>
-											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-											<h4><a href="#">Woman Necklace</a></h4>
-											<p class="quantity">1x - <span class="amount">$35.00</span></p>
-										</li>
-									</ul>
-									<div class="bottom">
-										<div class="total">
-											<span>Total</span>
-											<span class="total-amount">$134.00</span>
-										</div>
-										<a href="checkout.html" class="btn animate">Checkout</a>
-									</div>
-								</div>
+						
 								<!--/ End Shopping Item -->
 							</div>
 						</div>

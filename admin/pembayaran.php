@@ -1,5 +1,16 @@
 <?php 
-require_once ("koneksi.php");
+require_once ("../koneksi.php");
+
+session_start();
+
+if (!isset($_SESSION["usernameadm"])) {
+	echo "<script>alert('session berakhir !!!'); window.location.href='loginPage.php'</script>";
+	exit;
+}
+
+$id_admin=$_SESSION["id_admin"];
+$username=$_SESSION["usernameadm"];
+?>
 ?>
 
 <!DOCTYPE html>
@@ -11,14 +22,14 @@ require_once ("koneksi.php");
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Produk</title>
-        <link rel="stylesheet" type="text/css" href="public/css/bootstrap/bootstrap.css">
-        <link href="public/css/admin.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="../public/css/bootstrap/bootstrap.css">
+        <link href="../public/css/admin.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="home.php">Kasihkado</a>
+            <a class="navbar-brand" href="../home.php">Kasihkado</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -34,10 +45,9 @@ require_once ("koneksi.php");
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <a class="dropdown-item" href="#"><?php echo $_SESSION['usernameadm']; //menampilkan isi SESSION?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/login">Logout</a>
+                        <a class="dropdown-item" href="logoutAdmin.php">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -49,14 +59,11 @@ require_once ("koneksi.php");
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">PRODUCT</h1>
+                        <h1 class="mt-4">DATA TRANSAKSI</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="admin.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Product</li>
+                            <li class="breadcrumb-item active">Transaksi</li>
                         </ol>
-                        <form name="tambahproduk" action="tambahproduk.php" method="post">
-                        <button class="btn btn-success" type="submit">Tambah Produk</button>
-                        </form>
 
                         <div class="card mb-4">
                             <div class="card-header">
@@ -68,11 +75,11 @@ require_once ("koneksi.php");
                                     <table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Nama Produk</th>
-                                                <th>Harga</th>
-                                                <th>Jumlah</th>
-                                                <th>Deskripsi</th>
-                                                <th>Foto Produk</th>
+                                                <th>Nama Konsumen</th>
+                                                <th>Bank</th>
+                                                <th>No Rekening</th>
+                                                <th>Total Pembayaran</th>
+                                                <th>Status Pembayaran</th>
                                                 <th>Tindakan</th>
                                             </tr>
                                         </thead>
@@ -86,29 +93,25 @@ require_once ("koneksi.php");
                                             $previous = $halaman - 1;
                                             $next = $halaman + 1;
 
-                                            $query = mysqli_query($con,"SELECT * FROM barang  ORDER BY id_barang DESC");
+                                            $query = mysqli_query($con,"SELECT * FROM pembayaran  ORDER BY id_pembayaran DESC");
 
                                             $jumlah_data = mysqli_num_rows($query);
                                             $total_halaman = ceil($jumlah_data / $batas);
 
-                                            $data_barang = mysqli_query($con, "SELECT * FROM barang ORDER BY id_barang DESC LIMIT $halaman_awal, $batas");
+                                            $data_barang = mysqli_query($con, "SELECT * FROM `pembayaran` JOIN user ON pembayaran.id_user=user.id_user ORDER BY id_pembayaran DESC LIMIT $halaman_awal, $batas");
                                             $nomor = $halaman_awal+1;
                                             while ($record = mysqli_fetch_array($data_barang)) {
                                         ?>
                                                 <tr>
-                                                    <td><?php echo $record['nama_barang'] ?></td>
-                                                    <td><?php echo "Rp ".number_format($record['harga_brg'],0,",",".");?></td>
-                                                    <td><?php echo $record['jml_barang'] ?></td>
-                                                    <td><?php echo $record['deskripsi'] ?></td>
-                                                    <td><img src="public/images/product/<?php echo $record['foto'];  ?>"  width="200px" height="200px" /></td>
+                                                    <td><?php echo $record['nama_user'] ?></td>
+                                                    <td><?php echo $record['bank'] ?></td>
+                                                    <td><?php echo $record['no_rek'] ?></td>
+                                                    <td><?php echo $record['total_pembayaran'] ?></td>
+                                                    <td><?php echo $record['status'] ?></td>
                                                     <td>
                                                         <div class="text-center">
-                                                            <a href="javascript:void(0);" class="btn btn-sm btn-info edit"
-                                                                data-id="{{ id_product }}" data-nama_product="{{ nama_product }}"
-                                                                data-harga_product="{{ harga_product }}"
-                                                                data-deskripsi_product="{{ deskripsi_product }}">Edit</a>
-                                                            <a href="hapusproduk.php?idproduk=<?php echo $record['id_barang'] ?>;" class="btn btn-sm btn-danger delete"
-                                                                >Delete</a>
+                                                            <a href="konfirPembayaran.php?idpembayaran=<?php echo $record['id_pembayaran'] ?>;" class="btn btn-sm btn-success"
+                                                                >Konfirmasi pembayaran</a>
                                                         </div>
                                                         
                                                     </td>
@@ -164,7 +167,7 @@ require_once ("koneksi.php");
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div class="text-muted">Copyright &copy; Kasihkado 2020</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
