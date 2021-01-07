@@ -140,6 +140,7 @@ if (!isset($_SESSION["username"])) {
             </div>
           </div>
            <?php
+                $total += $_SESSION['qty_array'][$index]*$row['harga_brg'];
                 $index ++;
               }
             }
@@ -164,13 +165,13 @@ if (!isset($_SESSION["username"])) {
           <h5 class="mb-3">Total Harga</h5>
 
           <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-              Temporary amount
-              <span><?php $total += $_SESSION['qty_array'][$index]*$row['harga_brg']; ?></span>
+            <li class="list-group-item d-flex justify-content-center align-items-center border-0 px-0 pb-0">
+              
+              <span> Total Biaya : Rp <?php echo number_format($total, 2); ?></span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
               <div>
-              <span><strong>$53.98</strong></span>
+              <span><strong>Klik checkout untuk lanjut pembayaran</strong></span>
             </li>
           </ul>
 
