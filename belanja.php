@@ -24,7 +24,7 @@ $email=$_SESSION["email"];
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Title Tag  -->
-    <title>Kasihkado</title>
+    <title>Pesanan</title>
 	<!-- Favicon -->
 	<link rel="icon" type="public/image/png" href="public/images/favicon.png">
 	<!-- Web Font -->
@@ -80,6 +80,7 @@ $email=$_SESSION["email"];
 	?>
 <section>
 
+    <?php if(!isset($_GET['page'])){?>
     <!--Grid row-->
     <div class="row justify-content-center">
 
@@ -134,15 +135,24 @@ $email=$_SESSION["email"];
         </div>
 
     </div>
+    
     <!--Grid row-->
-
+<?php } ?>
+<div class="container" style="margin-top: 120px;">
+        <?php
+        if($_GET['page']=='detail'){
+                include"detail_barang_login.php";
+            } 
+        ?>
+    </div>
     </section>
+
     <!--Section: Block Content-->
+
         <?php
         include "footerLogin.php";
         ?>
-    
-    <!-- Jquery -->
+	<!-- Jquery -->
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/jquery-migrate-3.0.0.js"></script>
 	<script src="public/js/jquery-ui.min.js"></script>
@@ -173,16 +183,7 @@ $email=$_SESSION["email"];
 	<!-- Easing JS -->
 	<script src="public/js/easing.js"></script>
 	<!-- Active JS -->
-    <script src="public/js/active.js"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-  <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- MDB eCommerce core JavaScript -->
-  <script type="text/javascript" src="js/mdb-ecommerce.min.js"></script>
-  <!-- Your custom scripts (optional) -->
-  <script type="text/javascript"></script>
+	<script src="public/js/active.js"></script>
 </body>
 </html>
 

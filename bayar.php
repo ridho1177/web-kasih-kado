@@ -70,7 +70,7 @@ include ("headerLogin.php");
 
 <?php
     
-    $data_user = mysqli_query($con, "SELECT * FROM barang WHERE id_barang='".$_GET['idbarang']."'");
+    $data_user = mysqli_query($con, "SELECT * FROM barang WHERE id_barang= ".$_GET['idproduk']."");
 
 $record= mysqli_fetch_array($data_user);
 
@@ -84,7 +84,7 @@ $harga= $record["harga_brg"];
 				<div class="row"> 
 					<div class="col-lg-8 col-12">
 						<div class="checkout-form">
-                            <h2>CHECKOUT PESANAN</h2>
+                            <h2>KONFIRMASI PEMBAYARAN</h2>
 
 							<p>Mohon isi data berikut dengan benar.</p>
                             <!-- Form -->
@@ -93,61 +93,32 @@ $harga= $record["harga_brg"];
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
-											<label>Nama Depan<span>*</span></label>
-											<input type="text" name="nama_depan" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Nama Belakang<span>*</span></label>
-											<input type="text" name="nama_belakang" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Nomor Telepon<span>*</span></label>
-											<input type="text" name="no_hp" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Provinsi<span>*</span></label>
-											<select class="form-control" name="nama_provinsi">
-
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Kota/Kabupaten<span>*</span></label>
-											<select name="nama_distrik" class="form-control">
-												
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Alamat Lengkap<span>*</span></label>
-											<input type="text" name="alamat" placeholder="" required="required">
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-12">
-										<div class="form-group">
-											<label>Kode Pos<span>*</span></label>
-											<input type="text" name="kode_post" placeholder="" required="required">
+											<label>Nama Lengkap<span>*</span></label>
+											<input type="text" name="nama" placeholder="" required="required">
 										</div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
-											<label>Metode Pengiriman<span>*</span></label>
-											<select name="pengiriman" class="form-control">
-												<option value="divition" selected="selected">Pilih Kurir</option>
-												<option >JNE</option>
-												<option>J&T</option>
-												<option>POS</option>
+											<label>Bank<span>*</span></label>
+											<select name="bank" class="form-control">
+												<option value="divition" selected="selected">Pilih Bank</option>
+												<option >BRI</option>
+												<option>Mandiri</option>
+                                                <option>BCA</option>
+                                                <option>BNI</option>
+                                                <option>BPD</option>
+                                                <option>DANAMON</option>
+												<option>PERMATA</option>
 											</select>
 										</div>
 									</div>
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<label>No Rekening<span>*</span></label>
+											<input type="text" name="no_rek" placeholder="" required="required">
+										</div>
+									</div>
+
 								</div>
 							
 							<!--/ End Form -->
@@ -185,7 +156,7 @@ $harga= $record["harga_brg"];
 							<div class="single-widget get-button">
 								<div class="content">
 									<div class="button">
-										<button class="btn" type="submit" name="checkout"><a href="bayar.php?idproduk=<?php echo $record["id_barang"]?>;">Bayar</a></button>
+										<button class="btn" type="submit" name="bayar">konfirmasi</button>
 									</div>
 								</div>
                             </div>
@@ -205,27 +176,25 @@ $harga= $record["harga_brg"];
         
 
         <?php
-            if (isset($_POST['checkout'])) { 
+            if (isset($_POST['bayar'])) { 
 
-                $nama = $_POST['nama_depan']." ".$_POST['nama_belakang'];
-                $alamat = $_POST['alamat'].", ".$_POST['nama_distrik'].", ". $_POST['nama_provinsi'].", ".$_POST['kode_post'];  
-                $kurir = $_POST['pengiriman'];
-                $id_user=$_SESSION["id_user"];                        
-                $tgl=date("Y-m-d");
-                $barang = $_GET["idbarang"];
+                $nama = $_POST['nama'];
+                $bank = $_POST['bank'];  
+                $norek = $_POST['no_rek'];
 
 
                             //$sql= "INSERT INTO `transaksi` ( `nama_penerima`,`total_harga`, `jml_barang`, `alamat_kirim`, `pengiriman`, `tgl_transaksi`, `id_barang`, `id_user`, `status_transaksi`) VALUES ( 'ridho','100000', '1', 'jogja', '".$kurir."', '".$tgl."', '10', '".$_SESSION["id_user"]."', 'Belum Bayar')";
 
-                            $sql = "INSERT INTO `transaksi` ( `nama_penerima`,`total_harga`, `jml_barang`, `alamat_kirim`, `pengiriman`, `tgl_transaksi`, `id_barang`, `id_user`, `status_transaksi`) VALUES ( '".$nama."','100000', '1', '".$alamat."', '".$kurir."', '".$tgl."', '13', '".$_SESSION["id_user"]."', 'Belum Bayar')";
+                            //$sql = "INSERT INTO `transaksi` ( `nama_penerima`,`total_harga`, `jml_barang`, `alamat_kirim`, `pengiriman`, `tgl_transaksi`, `id_barang`, `id_user`, `status_transaksi`) VALUES ( '".$nama."','".$harga."', '1', '".$alamat."', '".$kurir."', '".$tgl."', '".$barang."', '".$_SESSION["id_user"]."', 'Belum Bayar')";
 
+                            $sql = "INSERT INTO `pembayaran` (`id_pembayaran`, `bank`, `status_pembayaran`, `no_rek`, `id_user`, `total_pembayaran`, `Nama Rekening`) VALUES (NULL, '".$bank."', 'Menunggu Konfriamsi', '".$norek."', '".$id_user."', '$harga', '".$nama."')";
                             //eksekusi query
                             $hasil=mysqli_query($con,$sql) ;
             ?>
 
             <script>
-                alert("Pemesanan Berhasil");
-                window.location='bayar.php';
+                alert("Konfrimasi Berhasil");
+                window.location='homeLogin.php';
             </script>
 
             <?php
@@ -243,33 +212,5 @@ $harga= $record["harga_brg"];
     <script src="public/js/jquery.min.js"></script>
     <script src="public/js/jquery-migrate-3.0.0.js"></script>
 	<script src="public/js/jquery-ui.min.js"></script> 
-
-    <script>
-
-        $(document).ready(function(){
-            $.ajax({
-
-            type:'post',
-            url: 'dataprovinsi.php',
-            success:function(hasil_provinsi){
-                $("select[name=nama_provinsi]").html(hasil_provinsi);
-            }
-            });
-
-            $("select[name=nama_provinsi]").on("change",function(){
-                //ambil id provinsi yg dipilih dari atribut pribadi
-                var id_provinsi_terpilih = $("option:selected",this).attr("id_provinsi");
-                $.ajax({
-                    type:'post',
-                    url: 'datadistrik.php',
-                    data:'id_provinsi='+id_provinsi_terpilih,
-                    success:function(hasil_distrik){
-                        $("select[name=nama_distrik]").html(hasil_distrik);
-                    }
-                })
-            })
-        });
-
-    </script>
 </body>
 </html>
