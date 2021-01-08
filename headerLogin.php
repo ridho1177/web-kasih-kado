@@ -19,7 +19,7 @@ unset($_SESSION['qty_array']);
 						<!-- Top Right -->
 						<div class="right-content">
 							<ul class="list-main">
-								<li><i class="ti-briefcase"></i> <a href="#">Pesanan saya</a></li>
+								<li><i class="ti-briefcase"></i> <a href="belanja.php">Pesanan saya</a></li>
 								<li><i class="ti-user"></i> <a href="profileUser.php"><?php echo $_SESSION['username'];?></a></li>
 								<li><i class="ti-power-off"></i><a href="logout.php">Logout</a></li>
 							</ul>

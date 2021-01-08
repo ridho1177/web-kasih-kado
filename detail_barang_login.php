@@ -1,6 +1,15 @@
-<?php 
+<?php
+require_once ("koneksi.php");
+session_start();
+
+if (!isset($_SESSION["username"])) {
+	 echo "<script>alert('session berakhir !!!'); window.location.href='home.php'</script>";
+	exit;
+}
+
 	$idbr = $_GET['idbrg'];
-	$sql = $con->query("SELECT*FROM barang WHERE id_barang='$idbr'");	
+	$idbrng = $_GET['idbrng'];
+	$sql = $con->query("SELECT*FROM barang WHERE id_barang LIKE '%$idbr' OR id_barang LIKE '%$idbrng'");	
 	$review = $sql->fetch_array();
  ?>
  

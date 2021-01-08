@@ -225,7 +225,7 @@ $harga= $record["harga_brg"];
 
             <script>
                 alert("Pemesanan Berhasil");
-                window.location='checkout.php';
+                window.location='homeLogin.php';
             </script>
 
             <?php

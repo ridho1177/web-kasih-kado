@@ -195,7 +195,7 @@ if (!isset($_SESSION["username"])) {
 </section>
 <!--Section: Block Content-->
     <?php
-	include "footer.php";
+	include "footerLogin.php";
     ?>
  
     <!-- Jquery -->
