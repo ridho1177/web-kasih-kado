@@ -85,8 +85,17 @@ $harga= $record["harga_brg"];
 					<div class="col-lg-8 col-12">
 						<div class="checkout-form">
                             <h2>KONFIRMASI PEMBAYARAN</h2>
-
-							<p>Mohon isi data berikut dengan benar.</p>
+                            <div class="col col-12">
+						<div class="order-details">
+							<!-- Order Widget -->
+                            <p>No Rek BRI : 1721928332222 (atas nama kasihkado)</p>
+                            <p>No Rek Mandiri : 121214432243 (atas nama kasihkado)</p>
+                            <p>No Rek BCA : 2134323355533 (atas nama kasihkado)</p>
+                            <p>No Rek BNI : 2321213232322 (atas nama kasihkado)</p>
+                        </div>
+                    </div>
+                            <p>Mohon isi data berikut dengan benar.</p>
+                            <!-- Form -->
                             <!-- Form -->
                             
 							<form class="form" method="post">

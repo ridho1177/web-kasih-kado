@@ -155,6 +155,10 @@ if (!isset($_SESSION["username"])) {
 
     </div>
     <!--Grid column-->
+    <?php 
+      $jmlBrg = count($_SESSION['cart']);
+     if($jmlBrg>0){
+    ?>
     <center>
     <div class="col-lg-3 mb-5" style="margin-top: -120px;">
       <!-- Card -->
@@ -187,6 +191,8 @@ if (!isset($_SESSION["username"])) {
 
     </div>
     </center>
+
+    <?php }?>
     <!--Grid column-->
 
   </div>
@@ -195,7 +201,7 @@ if (!isset($_SESSION["username"])) {
 </section>
 <!--Section: Block Content-->
     <?php
-	include "footerLogin.php";
+	include "footer.php";
     ?>
  
     <!-- Jquery -->

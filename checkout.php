@@ -86,8 +86,8 @@ $harga= $record["harga_brg"];
 						<div class="checkout-form">
                             <h2>CHECKOUT PESANAN</h2>
 
-							<p>Mohon isi data berikut dengan benar.</p>
-                            <!-- Form -->
+                            <p>Mohon isi data berikut dengan benar.</p>
+
                             
 							<form class="form" method="post">
 								<div class="row">
